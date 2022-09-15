@@ -8,4 +8,4 @@ class MyRandomAgent(EvaluationAgent):
 
 
 my_random_agent = MyRandomAgent()
-start(player_o=my_random_agent)
+start(player_o=my_random_agent, player_x = my_random_agent)
