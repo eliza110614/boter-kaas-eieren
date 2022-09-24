@@ -7,13 +7,19 @@ def menu():
   print("[3] - Tegen een slimme tegenstander spelen")
   print("[4] - De tegenstander trainen")
   print("[0] - Stop met spelen")
+  print()
+
+print("Welkom bij Boter, Kaas & Eieren!")
+print("Kies hieronder welk soort spel je wilt spelen:")
+print()
 
 menu()
-option = int(input("Kies je spel"))
+option = int(input("Kies je spel: "))
 
 while option != 0:
   if option == 1:
     start()
+    
   elif option == 2:
     class MyRandomAgent(EvaluationAgent):
       def evaluate(self, board, my_symbol, opponent_symbol):
@@ -26,8 +32,8 @@ while option != 0:
     class MyRandomAgent(EvaluationAgent):
       def evaluate(self, board, my_symbol, opponent_symbol):
         getal = 1
-        if board [4] == my_symbol:
-          getal = getal + 5
+        if can_win(board, opponent_symbol):
+          getal = getal - 1000
         return getal
 
     my_random_agent = MyRandomAgent()
@@ -37,8 +43,8 @@ while option != 0:
     class MyRandomAgent(EvaluationAgent):
       def evaluate(self, board, my_symbol, opponent_symbol):
         getal = 1
-        if can_win(board, opponent_symbol):
-          getal = getal - 1000
+        if board [4] == my_symbol:
+          getal = getal + 5
         return getal
 
     my_random_agent = MyRandomAgent()
@@ -46,3 +52,9 @@ while option != 0:
 
   else:
     print("Invalid option")
+  
+  print()
+  menu()
+  option = int(input("Kies je spel: "))
+
+print("Bedankt voor het spelen van Boter, Kaas & Eieren!")
