@@ -1,5 +1,5 @@
 import random
-from bke import EvaluationAgent, start, can_win, MLAgent, is_winner
+from bke import EvaluationAgent, start, can_win, MLAgent, is_winner, opponent, train, save
 
 def menu():
   print("[1] - Tegen een ander persoon spelen")
@@ -51,7 +51,8 @@ while option != 0:
         return reward
 
     my_agent = MyAgent()
-    start(player_o=my_agent)
+    train(my_agent, 3000)
+    save(my_agent, "MyAgent_3000")
 
   else:
     print("Invalid option")
