@@ -1,6 +1,7 @@
 import random
-from bke import EvaluationAgent, start, can_win, MLAgent, is_winner, opponent, train, save, load, validate, RandomAgent, plot_validation, train_and_plot
+from bke import EvaluationAgent, start, can_win, MLAgent, is_winner, opponent, RandomAgent, train_and_plot
 
+#start menu om te kiezen welk spel je wilt spelen
 def menu():
   print("[1] - Tegen een ander persoon spelen")
   print("[2] - Tegen een domme tegenstander spelen")
@@ -9,6 +10,7 @@ def menu():
   print("[0] - Stop met spelen")
   print()
 
+#begin spel
 print("Welkom bij Boter, Kaas & Eieren!")
 print("Kies hieronder welk soort spel je wilt spelen:")
 print()
@@ -16,10 +18,13 @@ print()
 menu()
 option = int(input("Kies je spel: "))
 
+#spelopties in 1 grote while-functie
 while option != 0:
+  #multiplayer
   if option == 1:
     start()
     
+  #domme speler  
   elif option == 2:
     class MyRandomAgent(EvaluationAgent):
       def evaluate(self, board, my_symbol, opponent_symbol):
@@ -28,6 +33,7 @@ while option != 0:
     my_random_agent = MyRandomAgent()
     start(player_o=my_random_agent)
     
+  #slimme speler  
   elif option == 3:
     class MyRandomAgent(EvaluationAgent):
       def evaluate(self, board, my_symbol, opponent_symbol):
@@ -38,7 +44,8 @@ while option != 0:
 
     my_random_agent = MyRandomAgent()
     start(player_o=my_random_agent)
-
+    
+  #agent trainen
   elif option == 4:
     class MyAgent(MLAgent):
       def evaluate(self, board):
@@ -61,9 +68,14 @@ while option != 0:
     iterations=50,
     trainings=100,
     validations=1000)
-
+    
+    #hyperparameters: met het aanpassen van een hyperparameter kan je machine learning-agent       configureren. er zijn 2 verschillende hyperparameters: 
+    #alpha: de leerfactor van de agent. bepaalt de snelheid waarmee de agent nieuwe kennis         adopteert. hoe hoger het getal, hoe hoger de snelheid waarmee de agent zijn oude kennis       zal vervangen met nieuwe kennis
+    #epsilon: de verkenningsfactor van de agent. bepaalt hoe vaak de agent nieuwe dingen zal       proberen. hoe hoger het getal, hoe vaker de agent een random actie probeert ipv iets          bekends.
+    #een hyperparameter is een floating point-getal tussen de 0 en 1. standaard staat de           agent op alpha-1.0 en epsilon=0.1.
     my_agent = MyAgent(alpha=0.8, epsilon=0.2)
 
+  #als er een invalid teken wordt ingevoerd
   else:
     print("Invalid option")
   
@@ -71,14 +83,5 @@ while option != 0:
   menu()
   option = int(input("Kies je spel: "))
 
+#einde van het spel
 print("Bedankt voor het spelen van Boter, Kaas & Eieren!")
-
-# Machine learning-agents kun je configureren door de zogenaamde hyperparameters aan te passen
-#alpha
-#Dit is de leerfactor van de agent. Deze bepaalt hoe snel de agent nieuwe kennis adopteert. Hoe hoger dit getal, hoe sneller de agent geneigd zal zijn om oude kennis te vervangen door nieuwe kennis.
-#epsilon
-#Dit is de verkenningsfactor van de agent. Deze bepaalt hoe vaak de agent nieuwe dingen probeert. Hoe hoger dit getal, hoe vaker de agent een willekeurige actie probeert in plaats van de best bekende zet.
-
-#Beide hyperparameters zijn floating point-getallen tussen de 0 en de 1. De agent staat standaard op alpha=1.0 en epsilon=0.1.
-
-my_agent = MyAgent(alpha=0.8, epsilon=0.2)
