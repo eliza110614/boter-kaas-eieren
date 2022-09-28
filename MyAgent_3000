@@ -1,0 +1,1 @@
+{"_alpha": 1.0, "_epsilon": 0.1, "_memory": {}, "_symbol": null, "learning": true, "symbol": null, "-meta": {"classes": {"/_memory": "typing.Dict[typish._types.Unknown, typish._types.Unknown]", "/": "__main__.MyAgent"}}}
